@@ -2,7 +2,11 @@ import React from 'react'
 import "./form.scss"
 function RequestRiderForm() {
     return (
-       <form action="" className="RRF mt-5">
+     <div className="container p-5">
+          <div  className=" p-4 riderformbox w-50 mx-auto ">
+                 <div className="rounded-circle formBox  ">
+                 <div className="profile-img"><img src="https://picsum.photos/200/300" alt="drivernae" width="100px" height="100px" className="rounded-circle"/></div>
+                   <form action="" className="RRF mt-5">
                     <div className="row d-flex justify-content-center">
                     <div className="col-12 d-flex justify-content-center mb-3">
                     <div className="form__group field w-100 px-5">
@@ -53,6 +57,10 @@ function RequestRiderForm() {
                     </div>
                     </div>
                 </form>
+                </div>
+                </div>
+               </div>
+      
     )
 }
 

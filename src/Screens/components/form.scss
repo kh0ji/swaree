@@ -53,3 +53,12 @@
     box-shadow: none;
   }
 }
+.formBox {
+  position: relative;
+  .profile-img {
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+  }
+}

@@ -33,10 +33,13 @@ function App() {
       <Riderform/>
     </FormMainBox>
       </Route> 
-    <Route path="/requestrider">
-      <RequestRider>
-        <RequestRiderForm/>
-      </RequestRider>
+    <Route exact path="/requestrider">
+      <RequestRider/>
+   
+    </Route>
+    <Route path="/requestrider/:id">
+      <RequestRiderForm/>
+   
     </Route>
     </Switch>
    
