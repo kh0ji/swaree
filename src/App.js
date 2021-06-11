@@ -1,9 +1,6 @@
 import { Route, Switch } from "react-router";
-import ForgetPassword from "./Screens/components/ForgetPassword";
-import LoginForm from "./Screens/components/LoginForm";
-import RegisterFrom from "./Screens/components/RegisterFrom";
-import Riderform from "./Screens/components/Riderform";
-import FormMainBox from "./Screens/FormMainBox";
+import { FormMainBox, Home, RequestRider } from "./Screens";
+import {Riderform,RegisterFrom,LoginForm,ForgetPassword, RequestRiderForm} from "./Screens/components"
 
 
 
@@ -13,6 +10,9 @@ function App() {
 
 
     <Switch>
+      <Route exact path="/" >
+      <Home/>
+      </Route>
       <Route path="/register">
       <FormMainBox title={"Create your account"}>
       <RegisterFrom/>
@@ -32,7 +32,12 @@ function App() {
       <FormMainBox title={"Post a Ride"}>
       <Riderform/>
     </FormMainBox>
-      </Route>
+      </Route> 
+    <Route path="/requestrider">
+      <RequestRider>
+        <RequestRiderForm/>
+      </RequestRider>
+    </Route>
     </Switch>
    
   );
