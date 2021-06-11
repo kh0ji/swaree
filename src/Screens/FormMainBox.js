@@ -9,7 +9,7 @@ function FormMainBox(props) {
     <div className="container login-box mx-auto ">
         <div className="row welcome-box ">
             <div className="col-12 col-sm-12 col-lg-6 box left  d-none d-sm-none d-lg-flex justify-content-center align-items-center">
-                <div className="login-image  p-5"><img src="Images/Register.png" alt="" srcSet=""/></div>
+                <div className="login-image  p-5"><img src="Images/Register.png" alt="" srcSet="" width="500px"/></div>
             </div>
             <div className="col-12 col-sm-12 col-lg-6 d-flex justify-content-center align-items-center">
                 <div className="p-0 p-lg-0 p-sm-5 right">
