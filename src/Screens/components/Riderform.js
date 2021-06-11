@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Form} from "react-bootstrap"
 function Riderform() {
     return (
          <form action="">
@@ -46,6 +46,12 @@ function Riderform() {
                         <label htmlFor="Fair" className="form__label">Fair</label>
                     </div>
                     </div>
+                     <Form.Group className="w-75">
+                        <Form.File id="exampleFormControlFile1" style={{color:"#198754"}} label="Your Image (we used in your profile)" />
+                    </Form.Group>
+                       <Form.Group className="w-75">
+                        <Form.File id="exampleFormControlFile1" style={{color:"#198754"}} label="Your Car image (we used in your profile)" />
+                    </Form.Group>
                     <div className="col-12 d-flex justify-content-start ml-5 pl-5 mt-3">
                         <label className="checkbox path">
                             <input type="checkbox"/>
@@ -55,6 +61,7 @@ function Riderform() {
                                 </path>
                             </svg>
                         </label>
+                       
                         <label className=" mx-1 che-label">All the Information is Correct<span className="text-danger"> *</span></label>
                     </div>
                     

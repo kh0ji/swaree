@@ -1,0 +1,52 @@
+:root {
+  --primaryColor: #000000;
+  --secondaryColor: #198754;
+  --tertiaryColor: #3e926b;
+  --blackWhite: #ffffff;
+  --textcolor: #000000;
+  --heading: #198754;
+  --footerbg: #000000;
+}
+body {
+  font-family: "Roboto", sans-serif !important;
+  background-color: var(--blackWhite);
+}
+html {
+  scroll-behavior: smooth;
+}
+.btn-round {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 35px !important;
+  width: 120px;
+  height: 40px;
+}
+.navbar-nav li a,
+.nav-btn {
+  font-size: 0.9em !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+.Header {
+  background-color: var(--secondaryColor) !important;
+}
+
+.nav-item:hover a {
+  color: var(--tertiaryColor) !important;
+}
+
+.Header nav .navbar-nav li:hover a {
+  color: var(--secondaryColor) !important;
+}
+
+.login-btn:hover {
+  color: var(--primaryColor) !important;
+}
+.register-btn {
+  background-color: var(--secondaryColor) !important;
+  color: #ffffff;
+  border: 1px solid #ffffff !important;
+}
+.register-btn:hover {
+  color: var(--secondaryColor) !important;
+  border: 1px solid var(--secondaryColor);
+  background-color: #ffffff !important;
+}

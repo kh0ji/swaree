@@ -1,5 +1,5 @@
 import { Route, Switch } from "react-router";
-import { FormMainBox, Home, RequestRider } from "./Screens";
+import { FormMainBox, Home, RequestRider ,Header} from "./Screens";
 import {Riderform,RegisterFrom,LoginForm,ForgetPassword, RequestRiderForm} from "./Screens/components"
 
 
@@ -7,8 +7,8 @@ import {Riderform,RegisterFrom,LoginForm,ForgetPassword, RequestRiderForm} from 
 
 function App() {
   return (
-
-
+<>
+    <Header/>
     <Switch>
       <Route exact path="/" >
       <Home/>
@@ -42,7 +42,7 @@ function App() {
    
     </Route>
     </Switch>
-   
+   </>
   );
 }
 
