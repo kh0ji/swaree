@@ -46,9 +46,9 @@ function LoginForm() {
                     <div className="col-12 d-flex justify-content-center mb-5">
                         <div className="create-account"><p><Link to="/register" data-bs-toggle="modal" data-bs-target="#Register" data-bs-dismiss="modal">Create Account</Link></p></div>
                     </div>
-                    <div className="col-12 d-flex justify-content-center">
+                    <div className="col-12 d-flex justify-content-center text-success">
                         <div className="create-account forget-pass">
-                            <p><Link to="/forgetpassword" data-bs-toggle="modal" data-bs-target="#forgetPassword" data-bs-dismiss="modal">Forgot Password?</Link></p>
+                            <p><Link to="/forgetpassword" className="text-success">Forgot Password?</Link></p>
                         </div>
                     </div>
                     </div>
