@@ -1,7 +1,34 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Header.scss"
 import {Link} from "react-router-dom"
-function Header() {
+import { Button } from "react-bootstrap";
+import { auth } from '../firebase';
+import { fetchuser } from '../FirebaseFuctions';
+
+
+function Header({person,setperson}) {
+
+  
+
+ var logout=()=>{
+     return auth.signOut().then((user) => {
+  return user
+}).catch((error) => {
+   return error
+});
+}
+ 
+    useEffect(()=>{
+
+        async function fetchData() {
+  
+       var user=await fetchuser()
+setperson(user)
+   
+  }
+  fetchData();
+   
+    },[person,setperson])
     return (
        <div className="Header sticky-top">
     
@@ -23,12 +50,24 @@ function Header() {
 
             </ul>
             <div className="d-flex align-items-start align-items-lg-center flex-column flex-lg-row unscroll">
+            {person===null?(
+                <>
                 <Link to="/login" className="btn nav-btn me-2 scroll-btn login-btn">
                     Login
                 </Link>
                 <Link  className="btn btn-dark nav-btn btn-round register-btn" to="/register">
                     Register
                 </Link>
+                </>
+            ):(<div style={{color:"white"}} className="d-flex">
+            <div className="mr-3"><img className="rounded-circle" src={person.img} width="60px" height="60px" alt="er"/></div>
+              <div className="d-flex flex-column">
+                <p className="m-0">{person && person.name}</p>
+                <p className="m-0">{person && person.email}</p>
+                <Button variant="warning" className="w-50 text-white" onClick={logout}>Logout</Button>
+              </div>
+            </div>)}
+                
             </div>
             </div>
         </div>

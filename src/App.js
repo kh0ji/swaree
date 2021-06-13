@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Route, Switch } from "react-router";
 import { FormMainBox, Home, RequestRider ,Header} from "./Screens";
 import {Riderform,RegisterFrom,LoginForm,ForgetPassword, RequestRiderForm} from "./Screens/components"
@@ -6,16 +7,18 @@ import {Riderform,RegisterFrom,LoginForm,ForgetPassword, RequestRiderForm} from 
 
 
 function App() {
+  var [person,setperson]=useState(null)
+  console.log(person);
   return (
 <>
-    <Header/>
+    <Header person={person} setperson={setperson}/>
     <Switch>
       <Route exact path="/" >
       <Home/>
       </Route>
       <Route path="/register">
       <FormMainBox title={"Create your account"}>
-      <RegisterFrom/>
+      <RegisterFrom setperson={setperson}/>
     </FormMainBox>
       </Route>
        <Route path="/login" >
