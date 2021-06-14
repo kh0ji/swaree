@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap';
 import {auth,firestore,storage} from "../../firebase"
-function RegisterFrom({setperson}) {
+function RegisterFrom({person,setperson}) {
     var [user ,setuser]=useState({
         Name:"",
         email:"",
@@ -105,8 +105,8 @@ if(error.length>0){
     setcls("")
     seterrors([])
     var img=await fetchimg(file)
-    
-    firestore.collection("users").doc(user.Name).set({
+     
+    firestore.collection("users").doc(user.Name.toLowerCase()).set({
         Name:user.Name,
         email:user.email,
         pass:user.pass,
@@ -170,7 +170,9 @@ setperson(user)
     },[setperson,reg])
  
     return (
-         <form action="" onSubmit={saveUser}>
+        <>
+           {person &&( <div>Already login</div>)}
+           {!person &&( <form action="" onSubmit={saveUser}>
                     <div className="row d-flex justify-content-center">
                     <div className="col-12 d-flex justify-content-center" >
                     <div className="form__group field w-100 px-5" >
@@ -288,7 +290,9 @@ setperson(user)
                     <div className="col-12 d-flex justify-content-center mt-4 mb-5"><button type="submit" disabled={loading?true:false} className="btn btn-box rounded-pill w-auto">{loading?"Processing..":"Register"}</button>
                     </div>
                     </div>
-                </form>
+                </form>)}
+         
+                </>
     )
 }
 

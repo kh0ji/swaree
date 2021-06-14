@@ -19,4 +19,4 @@ var auth= firebase.auth()
 var firestore= firebase.firestore()
 var storage= firebase.storage()
 
-export {auth ,firestore,storage}
+export {auth ,firestore,storage,firebase}

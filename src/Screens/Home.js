@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, } from 'react-router-dom'
 import "./Home.scss"
-function Home() {
+function Home({person}) {
+    
     return (
         <div className="home">
     <div className="container home-main mx-auto ">

@@ -8,22 +8,22 @@ import {Riderform,RegisterFrom,LoginForm,ForgetPassword, RequestRiderForm} from 
 
 function App() {
   var [person,setperson]=useState(null)
-  console.log(person);
+
   return (
 <>
     <Header person={person} setperson={setperson}/>
     <Switch>
       <Route exact path="/" >
-      <Home/>
+      <Home person={person}/>
       </Route>
       <Route path="/register">
       <FormMainBox title={"Create your account"}>
-      <RegisterFrom setperson={setperson}/>
+      <RegisterFrom person={person} setperson={setperson}/>
     </FormMainBox>
       </Route>
        <Route path="/login" >
       <FormMainBox title={"Login your account"}>
-      <LoginForm/>
+      <LoginForm person={person} setperson={setperson}/>
     </FormMainBox>
       </Route> 
       <Route path="/forgetpassword" >
