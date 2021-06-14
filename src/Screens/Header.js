@@ -53,10 +53,12 @@ function Header({person,setlogout}) {
                 </>
             ):(<div style={{color:"white"}} className="d-flex">
             <div className="mr-3"><img className="rounded-circle" src={person.img} width="60px" height="60px" alt="er"/></div>
-              <div className="d-flex flex-column">
+              <div className="d-flex flex-row align-items-center">
+              <div className="mr-3">
                 <p className="m-0">{person && person.name}</p>
                 <p className="m-0">{person && person.email}</p>
-                <Button variant="warning" className="w-50 text-white" onClick={logout}>Logout</Button>
+    </div>
+                <Button variant="warning" className="btn btn-dark nav-btn btn-round register-btn" onClick={logout}>Logout</Button>
               </div>
             </div>)}
                 
