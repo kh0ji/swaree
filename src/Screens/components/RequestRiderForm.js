@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./form.scss"
-function RequestRiderForm() {
+import { Link } from 'react-router-dom'
+function RequestRiderForm({person}) {
+
+   
     return (
-     <div className="container p-5">
+        <>
+
+          {!person && <div>Please <Link to="/login" className="text-success">Login</Link> First</div>}
+          {person && (   <div className="container p-5">
           <div  className=" p-4 riderformbox w-50 mx-auto ">
                  <div className="rounded-circle formBox  ">
                  <div className="profile-img"><img src="https://picsum.photos/200/300" alt="drivernae" width="100px" height="100px" className="rounded-circle"/></div>
@@ -59,7 +65,9 @@ function RequestRiderForm() {
                 </form>
                 </div>
                 </div>
-               </div>
+               </div>)}
+  
+               </>
       
     )
 }

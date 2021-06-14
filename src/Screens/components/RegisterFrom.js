@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback,  useState } from 'react'
 import { Form } from 'react-bootstrap';
 import {auth,firestore,storage} from "../../firebase"
-function RegisterFrom({person,setperson}) {
+function RegisterFrom({person,setreg}) {
     var [user ,setuser]=useState({
         Name:"",
         email:"",
@@ -11,7 +11,7 @@ function RegisterFrom({person,setperson}) {
     [errors,seterrors]=useState([]),
     [file,setfile]=useState([]),
     [cls,setcls]=useState(""),
-    [reg,setreg]=useState(false),
+    
     [loading,setloading]=useState(false),
 
     inputchange=useCallback((e)=>{
@@ -67,6 +67,7 @@ setuser((p)=>{
 saveUser= async(e)=>{
 e.preventDefault()
   let error=[]
+   setreg(false)
   setloading(true)
 if(user.Name===""){error.push({Nameempty:true})}else{
     var ref=firestore.collection("users").doc(user.Name)
@@ -113,8 +114,9 @@ if(error.length>0){
         img:img[0]
     }).then(()=>{
   auth.createUserWithEmailAndPassword(user.email,user.pass).then((user)=>{
-setreg(true)
+
  setloading(false)
+ setreg(true)
     }).catch((e)=>{
         console.log(e);
          setloading(false)
@@ -128,46 +130,9 @@ setreg(true)
 
 
 }
-},
-    fetchuser = async () => {
-      var promise = await new Promise(async (r, eror) => {
-        
-    
-          try {
-                  auth.onAuthStateChanged(async function  (usr) {
-          if (usr) {
-            var ref=firestore.collection("users")
-            var doc=await ref.where("email","==",usr.email).get()
-          
-          r({
-              email:doc.docs[0].data().email,
-              name:doc.docs[0].data().Name
-        })
-          } else {
-           r(null)
-          }
-        });
-            
-          } catch (error) {
-            eror(error);
-          }
-        
-      
-      });
-
-      return promise;
-    };
-    useEffect(()=>{
-
-        async function fetchData() {
-  
-       var user=await fetchuser()
-setperson(user)
+}
+ 
    
-  }
-  fetchData();
-   
-    },[setperson,reg])
  
     return (
         <>

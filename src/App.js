@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Switch } from "react-router";
+import { fetchuser } from "./FirebaseFuctions";
 import { FormMainBox, Home, RequestRider ,Header} from "./Screens";
 import {Riderform,RegisterFrom,LoginForm,ForgetPassword, RequestRiderForm} from "./Screens/components"
 
@@ -8,22 +9,37 @@ import {Riderform,RegisterFrom,LoginForm,ForgetPassword, RequestRiderForm} from 
 
 function App() {
   var [person,setperson]=useState(null)
+  var [logout,setlogout]=useState(false)
+  var [login,setlogin]=useState(false)
+  var [reg,setreg]=useState(false)
+ useEffect(()=>{
 
+        async function fetchData() {
+  
+       var user=await fetchuser()
+       console.log(user);
+        setperson(user)
+   
+  }
+  fetchData();
+   
+    },[logout,login,reg])
+    console.log(person);
   return (
 <>
-    <Header person={person} setperson={setperson}/>
+    <Header person={person} setlogout={setlogout}/>
     <Switch>
       <Route exact path="/" >
       <Home person={person}/>
       </Route>
       <Route path="/register">
       <FormMainBox title={"Create your account"}>
-      <RegisterFrom person={person} setperson={setperson}/>
+      <RegisterFrom person={person} setreg={setreg} />
     </FormMainBox>
       </Route>
        <Route path="/login" >
       <FormMainBox title={"Login your account"}>
-      <LoginForm person={person} setperson={setperson}/>
+      <LoginForm person={person} setlogin={setlogin}/>
     </FormMainBox>
       </Route> 
       <Route path="/forgetpassword" >
@@ -33,15 +49,15 @@ function App() {
       </Route>
        <Route path="/postrider" >
       <FormMainBox title={"Post a Ride"}>
-      <Riderform/>
+      <Riderform person={person}/>
     </FormMainBox>
       </Route> 
     <Route exact path="/requestrider">
-      <RequestRider/>
+      <RequestRider person={person}/>
    
     </Route>
     <Route path="/requestrider/:id">
-      <RequestRiderForm/>
+      <RequestRiderForm person={person}/>
    
     </Route>
     </Switch>

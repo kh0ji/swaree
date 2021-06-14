@@ -1,5 +1,5 @@
 
-import {auth ,firestore} from "./firebase"
+import {auth ,firestore, storage} from "./firebase"
 
 
 
@@ -36,3 +36,27 @@ export  var  fetchuser=async()=>{
 
 
 
+ export  var fetchimg = async (acceptedFiles) => {
+      var promise = await new Promise(async (r, eror) => {
+        var array = [];
+        for (var i = 0; i < Array.from(acceptedFiles).length; i++) {
+          try {
+            
+            let bucketName = "Images";
+            var filename = Array.from(acceptedFiles)[i].name.split(".");
+            var ext = filename[filename.length - 1];
+            let storageRef = storage
+              .ref(`${bucketName}/${Date.now()}.${ext}`);
+            let upload = await storageRef.put(Array.from(acceptedFiles)[i]);
+            
+            const downloadURL = await upload.ref.getDownloadURL();
+            array.push(downloadURL);
+          } catch (error) {
+            eror(error);
+          }
+        }
+        r(array);
+      });
+
+      return promise;
+    }

@@ -1,34 +1,26 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import "./Header.scss"
 import {Link} from "react-router-dom"
 import { Button } from "react-bootstrap";
 import { auth } from '../firebase';
-import { fetchuser } from '../FirebaseFuctions';
 
 
-function Header({person,setperson}) {
+
+function Header({person,setlogout}) {
 
   
 
  var logout=()=>{
+      setlogout(false)
      return auth.signOut().then((user) => {
+         setlogout(true)
   return user
 }).catch((error) => {
    return error
 });
 }
  
-    useEffect(()=>{
 
-        async function fetchData() {
-  
-       var user=await fetchuser()
-setperson(user)
-   
-  }
-  fetchData();
-   
-    },[person,setperson])
     return (
        <div className="Header sticky-top">
     

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { auth, firestore ,firebase} from '../../firebase'
-import { fetchuser } from '../../FirebaseFuctions'
 
-function LoginForm({person,setperson}) {
+
+function LoginForm({person,setlogin}) {
 
       var [user ,setuser]=useState({
         Name:"",
@@ -15,7 +15,7 @@ function LoginForm({person,setperson}) {
     history=useHistory(),
     [errors,seterrors]=useState([]),
      [loading , setloading]=useState(false),
-     [logn , setlogn]=useState(false),
+  
     inputChange=(e)=>{
         var {name,value}=e.target
         setuser((p)=>{
@@ -37,6 +37,7 @@ function LoginForm({person,setperson}) {
     loginuser= async(e)=>{
         e.preventDefault()
           let error=[]
+          setlogin(false)
   setloading(true)
   let email=""
 if(user.Name===""){error.push({Nameempty:true})}else{
@@ -64,7 +65,7 @@ if(error.length>0){
   .then((userCredential) => {
     // Signed in
      setloading(false)
-     setlogn(true)
+   setlogin(true)
     history.push("/")
      
     // ...
@@ -90,17 +91,7 @@ if(error.length>0){
    
 }
     }
- useEffect(()=>{
 
-        async function fetchData() {
-  
-       var user=await fetchuser()
-        setperson(user)
-   
-  }
-  fetchData();
-   
-    },[setperson,logn])
  
     return (
         <>
