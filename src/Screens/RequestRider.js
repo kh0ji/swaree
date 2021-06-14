@@ -19,12 +19,13 @@ function RequestRider({person}) {
     })
     return (
         <>
-           {!person && <div>Please <Link to="/login" className="text-success">Login</Link> First</div>}
-           {person && (     <Container fluid>
+               <Container fluid>
            <Row className="pt-5">
                <Col lg={12} className="p-0">
                    <div className=" ridermainheading "><h1>Available Rides</h1></div>
                </Col>
+               {!person && <div className="w-100 text-center">Please <Link to="/login" className="text-success">Login</Link> first to see riders</div>}
+           {person && ( 
                <Col lg={12} className="mt-5 ">
               <Row className="d-flex justify-content-lg-around p-4">
 
@@ -43,8 +44,9 @@ function RequestRider({person}) {
                 
 
                </Col>
+               )}
            </Row>
-       </Container>)}
+       </Container>
   
        </>
     )
