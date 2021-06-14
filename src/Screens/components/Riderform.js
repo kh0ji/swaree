@@ -132,7 +132,7 @@ setloading(false)
         })
     }
    
-  console.log(errors);
+
     return (
         <>
         {!person && <div>Please <Link to="/login" className="text-success">Login</Link> First</div>}

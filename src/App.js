@@ -17,14 +17,14 @@ function App() {
         async function fetchData() {
   
        var user=await fetchuser()
-       console.log(user);
+      
         setperson(user)
    
   }
   fetchData();
    
     },[logout,login,reg])
-    console.log(person);
+
   return (
 <>
     <Header person={person} setlogout={setlogout}/>
