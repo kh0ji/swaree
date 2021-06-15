@@ -166,7 +166,7 @@ if(error.length>0){
                     </label>
                     <label className=" mx-1 che-label" >Remember Me</label>
                     </div>
-                    <div className="col-12 d-flex justify-content-center mt-4 mb-5"><button type="submit" className="btn btn-box rounded-pill w-25" disabled={loading}>{loading?"Processing..":"Login"}</button>
+                    <div className="col-12 d-flex justify-content-center mt-4 mb-5"><button type="submit" className="btn btn-box-green rounded-pill w-25" disabled={loading}>{loading?"Processing..":"Login"}</button>
                     </div>
                     <div className="col-12 d-flex justify-content-center mb-5">
                         <div className="create-account"><p><Link to="/register" data-bs-toggle="modal" data-bs-target="#Register" data-bs-dismiss="modal">Create Account</Link></p></div>

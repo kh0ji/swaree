@@ -11,8 +11,8 @@ function FormMainBox(props) {
             <div className="col-12 col-sm-12 col-lg-6 box left  d-none d-sm-none d-lg-flex justify-content-center align-items-center">
                 <div className="login-image  p-5"><img src="Images/Register.png" alt="" srcSet="" width="500px"/></div>
             </div>
-            <div className="col-12 col-sm-12 col-lg-6 d-flex justify-content-center align-items-center">
-                <div className="p-0 p-lg-0 p-sm-5 right">
+            <div className="col-12 col-sm-12 col-lg-6 d-flex justify-content-center align-items-center  bg-white formbox">
+                <div className="p-0 p-lg-0 p-sm-5 right  ">
                 <div className="login-heading d-flex justify-content-center">
                     <h1>{props.title}</h1>
                 </div>

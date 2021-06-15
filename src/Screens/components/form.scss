@@ -69,3 +69,8 @@
 .modal-dialog {
   width: 500px !important ;
 }
+@media (max-width: 450px) {
+  .riderformbox.w-50 {
+    width: 100% !important;
+  }
+}

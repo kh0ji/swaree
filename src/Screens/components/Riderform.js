@@ -293,7 +293,7 @@ setriderposted(false)
                                  return null
                                
                             })}
-                    <div className="col-12 d-flex justify-content-start ml-5 pl-5 mt-3">
+                    <div className="col-11 d-flex justify-content-start ml-5 mt-3">
                         <label className="checkbox path">
                             <input type="checkbox" name="conf" checked={rider.conf} onChange={selectChange}/>
                             <svg viewBox="0 0 21 21">
@@ -303,11 +303,11 @@ setriderposted(false)
                             </svg>
                         </label>
                        
-                        <label className={` mx-1 che-label ${cls}`}>All the Information is Correct<span className="text-danger"> *</span></label>
+                        <label className={` mx-1 che-label ${cls} `}>All the Information is Correct<span className="text-danger"> *</span></label>
                     </div>
                     
     
-                    <div className="col-12 d-flex justify-content-center mt-4 mb-5"><button type="submit" className="btn btn-box rounded-pill w-auto" disabled={loading}> {loading?"Proccesing..":"Post my Ride"}</button>
+                    <div className="col-12 d-flex justify-content-center mt-4 mb-5"><button type="submit" className="btn btn-box-green rounded-pill w-auto" disabled={loading}> {loading?"Proccesing..":"Post my Ride"}</button>
                     </div>
                     </div>
                 </form>

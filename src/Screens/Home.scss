@@ -4,17 +4,17 @@ a {
 }
 $shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.8);
 .home {
-  height: 100vh;
-  width: 100vw;
+  height: auto;
+
   position: relative;
 
   .home-main {
     position: absolute;
-    top: 10%;
+    top: 20%;
     left: 50%;
 
     -ms-transform: translateY(-20%);
-    transform: translateY(-10%);
+    transform: translateY(-20%);
     -ms-transform: translateX(-50%);
     transform: translateX(-50%);
     .home-main-box {
@@ -38,4 +38,15 @@ $shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.8);
   background-color: #198754 !important;
   color: #ffffff !important;
   border-color: #ffffff !important;
+}
+@media (max-width: 450px) {
+  .home-main-box img {
+    width: 100%;
+  }
+  .home-btn-box.w-50 {
+    width: 200px !important;
+  }
+  .home-btn-box a {
+    font-size: 12px;
+  }
 }

@@ -9,7 +9,7 @@ body {
   height: 100vh;
   width: 100vw;
   position: relative;
-  overflow: scroll;
+
   .login-box {
     position: absolute;
     top: 10%;
@@ -43,6 +43,11 @@ body {
 }
 .btn-box {
   width: 200px !important;
+}
+.btn-box-green {
+  width: 200px !important;
+  background-color: #198754 !important;
+  color: #fff !important;
 }
 .forget-info {
   color: var(--primary);
@@ -288,4 +293,7 @@ body {
     max-width: 100% !important;
     margin: 1.75rem auto;
   }
+}
+.formbox {
+  border-radius: 30px;
 }
