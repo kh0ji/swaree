@@ -57,8 +57,15 @@
   position: relative;
   .profile-img {
     position: absolute;
-    top: -20%;
+    top: -25%;
     left: 50%;
-    transform: translate(-50%, 20%);
+    transform: translate(-50%, 25%);
   }
+}
+.profile h1 {
+  font-size: 1em;
+  color: #ffff;
+}
+.modal-dialog {
+  width: 500px !important ;
 }
