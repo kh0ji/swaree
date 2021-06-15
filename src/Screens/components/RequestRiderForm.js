@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import "./form.scss"
-import { Link, useParams } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { firestore } from '../../firebase'
 import { Modal ,Button} from "react-bootstrap"
 
 function RequestRiderForm({person}) {
+  var history=useHistory()
 var  MyVerticallyCenteredModal=(props)=>{
   return (
     <Modal
@@ -43,7 +44,8 @@ var  MyVerticallyCenteredModal=(props)=>{
 },
  params=useParams(),
  [modalShow, setModalShow] = useState(false),
-[rider,setrider]=useState({})
+[rider,setrider]=useState({}),
+[deleting,  setdeleting]=useState(false)
     useEffect(()=>{
 
     firestore.collection("riders").doc(params.id).get().then((rid)=>{
@@ -52,7 +54,24 @@ var  MyVerticallyCenteredModal=(props)=>{
       
     })  
     },[params.id])
-   console.log(rider);
+  
+
+var deleteRide=()=>{
+ 
+  var conf=window.confirm("want to delete this ride?")
+  if(conf){
+     setdeleting(true)
+  firestore.collection("riders").doc(params.id).delete().then(()=>{
+history.push("/requestrider")
+setdeleting(false)
+  }).catch((e)=>{
+    console.log(e);
+    setdeleting(false)
+  })
+  }
+
+}
+
     return (
         <>
 
@@ -94,7 +113,9 @@ var  MyVerticallyCenteredModal=(props)=>{
                  
                     
     
-                    <div className="col-12 d-flex justify-content-center mt-4 mb-5"><button type="button" className="btn btn-box rounded-pill w-auto bg-white text-success font-weight-bold p-2"  onClick={() => setModalShow(true)}>Request a Ride</button>
+                    <div className="col-12 d-flex justify-content-center mt-4 mb-5">
+
+                    {person && rider && rider.email===person.email ?(<button type="button" className="btn btn-box rounded-pill w-auto bg-white text-success font-weight-bold p-2"  onClick={deleteRide} disabled={deleting}>{deleting ?"Deleting...":"Delete a Ride"}</button>):(<button type="button" className="btn btn-box rounded-pill w-auto bg-white text-success font-weight-bold p-2"  onClick={() => setModalShow(true)}>Request a Ride</button>)}
                     </div>
                     </div>
                 </form>
