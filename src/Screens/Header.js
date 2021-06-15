@@ -29,8 +29,8 @@ function Header({person,setlogout}) {
   
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-auto">
-     
+    <Nav className="mr-auto text-white font-weight-bold">
+     SWAREE | THE RIDE SHARING PLATFORM
     </Nav>
      <div className="d-flex align-items-start align-items-lg-center flex-column flex-lg-row unscroll">
             {person===null?(
