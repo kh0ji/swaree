@@ -27,7 +27,7 @@ if(person){
   
  
 
-      if(snapshot.val().from===person.email || snapshot.val().to===person.email){
+      if(snapshot.val().from===person.email){
         
       
   setnotiicon(false)
