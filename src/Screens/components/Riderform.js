@@ -3,6 +3,9 @@ import {Form} from "react-bootstrap"
 import { Link } from 'react-router-dom'
 import { firestore } from '../../firebase'
 import { fetchimg } from '../../FirebaseFuctions'
+
+
+
 function Riderform({person}) {
 
     var [rider,setrider]=useState({
@@ -132,7 +135,20 @@ setloading(false)
             }
         })
     }
-   
+   function mindate(){
+   var dtToday = new Date();
+    
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    
+    var maxDate = year + '-' + month + '-' + day;
+  return maxDate
+}
 
     return (
         <>
@@ -260,7 +276,7 @@ setriderposted(false)
                     </div> 
                     <div className="col-12 d-flex justify-content-center mb-3">
                     <div className="form__group field w-100 px-5">
-                        <input type="date" className="form__field" mindate={new Date()} placeholder="Departure Date" name="depDate" id='Departure Date'  value={rider.depDate} onChange={inputChange}  />
+                        <input type="date" className="form__field" mindate={new Date()} placeholder="Departure Date" name="depDate" id='Departure Date'  value={rider.depDate} onChange={inputChange}  min={mindate()} />
                         <label htmlFor="Departure Date" className="form__label">Departure Date</label>
                          {errors && errors.map(({depDateempty},index)=>{
                                
@@ -275,7 +291,7 @@ setriderposted(false)
                     </div>
                     <div className="col-12 d-flex justify-content-center mb-3">
                     <div className="form__group field w-100 px-5">
-                        <input type="time" className="form__field" placeholder="Departure Time" name="depTime" id='Departure Time' value={rider.depTime} mindate={new Date()} onChange={inputChange}  />
+                        <input type="time" className="form__field" placeholder="Departure Time" name="depTime" id='Departure Time' value={rider.depTime} onChange={inputChange}  />
                         <label htmlFor="Departure Time" className="form__label">Departure Time</label>
                            {errors && errors.map(({depTimeempty},index)=>{
                                
