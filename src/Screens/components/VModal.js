@@ -53,7 +53,7 @@ doc.forEach(key=>{
   if(error.length){
       setsending(false)
       seterrors(error)
-  console.log(error);
+
     }else{
      setsending(false)
    database.ref('users/'+ uuid()).set(req)
