@@ -226,14 +226,8 @@ setriderposted(false)
                     </div>
                     <div className="col-12 d-flex justify-content-center mb-3">
                     <div className="form__group field w-100 px-5">
-                        <select type="text" className="form__field" placeholder="Departure City" name="depCity" id='Departure City'  value={rider.depCity} onChange={inputChange} >
-                              <option value=''>Select City</option>
-                             <option value='Faisalabad'>Faisalabad</option>
-                             <option value='Lahore'>Lahore</option>
-                             <option value='Karachi'>Karachi</option>
-                             <option value='Islamabad'>Islamabad</option>
-                             <option value='Bhakhar'>Bhakhar</option>
-                        </select>
+                        <input type="text" className="form__field" placeholder="Departure City" name="depCity" id='Departure City'  value={rider.depCity} onChange={inputChange} />
+                         
                         <label htmlFor="Departure City" className="form__label">Departure City</label>
                          {errors && errors.map(({depCityempty},index)=>{
                                
@@ -247,15 +241,8 @@ setriderposted(false)
                     </div>
                      <div className="col-12 d-flex justify-content-center mb-3">
                     <div className="form__group field w-100 px-5">
-                        <select  className="form__field" placeholder="Arrival City" name="arriCity" id='Arrival City'  value={rider.arriCity} onChange={inputChange}  >
+                        <input  className="form__field" placeholder="Arrival City" name="arriCity" id='Arrival City'  value={rider.arriCity} onChange={inputChange} />
 
-                             <option value=''>Select City</option>
-                             <option value='Faisalabad'>Faisalabad</option>
-                             <option value='Lahore'>Lahore</option>
-                             <option value='Karachi'>Karachi</option>
-                             <option value='Islamabad'>Islamabad</option>
-                             <option value='Bhakhar'>Bhakhar</option>
-                        </select>
                         <label htmlFor="Arrival City" className="form__label">Arrival City</label>
                          {errors && errors.map(({arriCityempty},index)=>{
                                

@@ -76,7 +76,7 @@ setreq((p)=>({...p,
 
 }, [person,rideremail,ridername])
 
-  console.log(sending);
+
   return (
   <Modal
       

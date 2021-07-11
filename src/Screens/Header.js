@@ -12,26 +12,50 @@ function Header({person,setlogout}) {
  var [noti,setnoti]=useState([])
  var [singlenoti,setsinglenoti]=useState({})
  var [notishow,setnotishow]=useState(false)
-console.log(singlenoti);
+ var [notiicon,setnotiicon]=useState(true)
+
 useEffect(() => {
 if(person){
 
+    
 
   const notiref=database.ref("users")
-  notiref.on("value",(snapshot)=>{
 
+  notiref.on("child_changed",(snapshot)=>{
+ 
+ 
+  
+ 
+
+      if(snapshot.val().from===person.email || snapshot.val().to===person.email){
+        
+      
+  setnotiicon(false)
+    
+      }
+  
+  
+     
+  })
+  notiref.on("value",(snapshot)=>{
+ 
+   
     let nofti=[]
     snapshot.forEach(snap=>{
 
       if(snap.val().from===person.email || snap.val().to===person.email){
         
        nofti.push({...snap.val(),id:snap.key})
+  
+    
       }
     
     })
     setnoti(nofti)
+     
   })
 }
+return  
 }, [person]) 
   
 
@@ -49,6 +73,7 @@ var showmodelnoti=(data)=>{
 setsinglenoti(data)
 setnotishow(false)
 setModalShow(true)
+
 }
 
     return (
@@ -63,8 +88,10 @@ setModalShow(true)
      SWAREE | THE RIDE SHARING PLATFORM
     </Nav>
     <div className="position-relative">
-     <IconButton aria-label="cart" onClick={()=>{setnotishow((p)=>(!p))}} >
-    <Badge  style={{color:"white"}} >
+     <IconButton aria-label="cart" onClick={()=>{
+       setnotiicon(true)
+       setnotishow((p)=>(!p))}} >
+    <Badge color="secondary" style={{color:"white"}} variant="dot" invisible={notiicon}>
           <MailIcon />
         </Badge>
  </IconButton>
