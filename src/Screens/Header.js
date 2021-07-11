@@ -7,6 +7,17 @@ import MailIcon from '@material-ui/icons/Mail';
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
 import Notificationmodal from './Notificationmodal';
+
+
+function playSound () {
+
+  const audio = new Audio("https://firebasestorage.googleapis.com/v0/b/swaree-59063.appspot.com/o/sound.mp3?alt=media&token=efe8f470-7f8c-48f1-890b-52c958d73217");
+
+ 
+  audio.play();
+ 
+ 
+}
 function Header({person,setlogout}) {
     const [modalShow, setModalShow] = useState(false);
  var [noti,setnoti]=useState([])
@@ -14,24 +25,26 @@ function Header({person,setlogout}) {
  var [notishow,setnotishow]=useState(false)
  var [notiicon,setnotiicon]=useState(true)
 
+
 useEffect(() => {
+   
 if(person){
 
-    
+  
 
   const notiref=database.ref("users")
 
   notiref.on("child_changed",(snapshot)=>{
  
- 
+
   
- 
+
 
       if(snapshot.val().from===person.email){
-        
-      
+     
+       playSound()
   setnotiicon(false)
-    
+      
       }
   
   
@@ -39,15 +52,14 @@ if(person){
   })
  notiref.on("child_added",(snapshot)=>{
  
- 
- 
+      
  
 
       if(snapshot.val().to===person.email && snapshot.val().status==="pending"){
-        
-      
+       
+        playSound()
   setnotiicon(false)
-    
+     
       }
   
   
