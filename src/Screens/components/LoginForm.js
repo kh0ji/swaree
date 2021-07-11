@@ -1,8 +1,15 @@
 import React, {  useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { auth, firestore ,firebase} from '../../firebase'
+function validateEmail(email) 
+    {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
 
-
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 function LoginForm({person,setlogin}) {
 
       var [user ,setuser]=useState({
@@ -40,9 +47,11 @@ function LoginForm({person,setlogin}) {
           setlogin(false)
   setloading(true)
   let email=""
-if(user.Name===""){error.push({Nameempty:true})}else{
-    var ref=firestore.collection("users").doc(user.Name)
-var doc=await ref.get()
+
+
+if(user.Name===""){error.push({Nameempty:true})}else if(!validateEmail(user.Name)){
+    let ref=firestore.collection("users").doc(capitalizeFirstLetter(user.Name))
+let doc=await ref.get()
 
 if(!doc.exists){
     error.push({Namenotvalid:true})
@@ -54,11 +63,28 @@ else{
 }
 
 }
+else if(validateEmail(user.Name)){
+        let ref=firestore.collection("users")
+        .where("email","==",user.Name)
+let doc=await ref.get()
+
+
+if(doc.empty){
+   
+    error.push({Namenotvalid:true})
+}
+else{
+    
+    email=doc.docs[0].data().email
+  
+}
+}
 if(user.pass===""){error.push({passempty:true})}
 
-if(error.length>0){
+if(error.length){
      seterrors(error)
     setloading(false)
+  
 }else{
     auth.setPersistence( user.rememberme? firebase.auth.Auth.Persistence.LOCAL:firebase.auth.Auth.Persistence.SESSION).then(()=>{
          auth.signInWithEmailAndPassword(email, user.pass)
@@ -113,7 +139,7 @@ if(error.length>0){
                              {errors && errors.map(({Namenotvalid},index)=>{
                                
                                 if(Namenotvalid){
-                                    return <span key={index} className="w-100 text-danger" style={{fontSize:".8em"}}>Your username invalid</span>
+                                    return <span key={index} className="w-100 text-danger" style={{fontSize:".8em"}}>Your username/email invalid</span>
                                 } 
                                  return null
                                

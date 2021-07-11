@@ -38,6 +38,7 @@ function Riderform({person}) {
             
     }
         if(rider.carName===""){error.push({carNameempty:true})}
+        if(rider.arriCity===rider.depCity){error.push({changarr:true})}
         if(rider.depCity===""){error.push({depCityempty:true})}
         if(rider.arriCity===""){error.push({arriCityempty:true})}
         if(rider.depTime===""){error.push({depTimeempty:true})}
@@ -174,7 +175,14 @@ setriderposted(false)
                     </div>
                     <div className="col-12 d-flex justify-content-center mt-3 mb-4">
                         <div className="form__group field w-100 px-5">
-                            <input type="text" className="form__field" placeholder="Car Name & Model" name="carName" id='Car Name & Model' value={rider.carName} onChange={inputChange} />
+                            <select type="text" className="form__field" placeholder="Car Name & Model" name="carName" id='Car Name & Model' value={rider.carName} onChange={inputChange} >
+                                <option value="">Select Car</option>
+                                <option value="sazuki">sazuki</option>
+                                <option value="Mehran">Mehran</option>
+                                <option value="Honda Civic">Honda Civic</option>
+                                <option value="Vitz">Vitz</option>
+                                <option value="Cultus">Cultus</option>
+                            </select>
                             <label htmlFor="Car Name & Model" className="form__label">Car Name & Model</label>
                               {errors && errors.map(({carNameempty},index)=>{
                                
@@ -202,7 +210,14 @@ setriderposted(false)
                     </div>
                     <div className="col-12 d-flex justify-content-center mb-3">
                     <div className="form__group field w-100 px-5">
-                        <input type="text" className="form__field" placeholder="Departure City" name="depCity" id='Departure City'  value={rider.depCity} onChange={inputChange} />
+                        <select type="text" className="form__field" placeholder="Departure City" name="depCity" id='Departure City'  value={rider.depCity} onChange={inputChange} >
+                              <option value=''>Select City</option>
+                             <option value='Faisalabad'>Faisalabad</option>
+                             <option value='Lahore'>Lahore</option>
+                             <option value='Karachi'>Karachi</option>
+                             <option value='Islamabad'>Islamabad</option>
+                             <option value='Bhakhar'>Bhakhar</option>
+                        </select>
                         <label htmlFor="Departure City" className="form__label">Departure City</label>
                          {errors && errors.map(({depCityempty},index)=>{
                                
@@ -216,7 +231,15 @@ setriderposted(false)
                     </div>
                      <div className="col-12 d-flex justify-content-center mb-3">
                     <div className="form__group field w-100 px-5">
-                        <input type="text" className="form__field" placeholder="Arrival City" name="arriCity" id='Arrival City'  value={rider.arriCity} onChange={inputChange}  />
+                        <select  className="form__field" placeholder="Arrival City" name="arriCity" id='Arrival City'  value={rider.arriCity} onChange={inputChange}  >
+
+                             <option value=''>Select City</option>
+                             <option value='Faisalabad'>Faisalabad</option>
+                             <option value='Lahore'>Lahore</option>
+                             <option value='Karachi'>Karachi</option>
+                             <option value='Islamabad'>Islamabad</option>
+                             <option value='Bhakhar'>Bhakhar</option>
+                        </select>
                         <label htmlFor="Arrival City" className="form__label">Arrival City</label>
                          {errors && errors.map(({arriCityempty},index)=>{
                                
@@ -225,12 +248,19 @@ setriderposted(false)
                                 } 
                                  return null
                                
+                            })}{errors && errors.map(({changarr},index)=>{
+                               
+                                if(changarr){
+                                    return <span key={index} className="w-100 text-danger" style={{fontSize:".8em"}}>Please enter different Arrival City</span>
+                                } 
+                                 return null
+                               
                             })}
                     </div>
                     </div> 
                     <div className="col-12 d-flex justify-content-center mb-3">
                     <div className="form__group field w-100 px-5">
-                        <input type="date" className="form__field" placeholder="Departure Date" name="depDate" id='Departure Date'  value={rider.depDate} onChange={inputChange}  />
+                        <input type="date" className="form__field" mindate={new Date()} placeholder="Departure Date" name="depDate" id='Departure Date'  value={rider.depDate} onChange={inputChange}  />
                         <label htmlFor="Departure Date" className="form__label">Departure Date</label>
                          {errors && errors.map(({depDateempty},index)=>{
                                
@@ -245,7 +275,7 @@ setriderposted(false)
                     </div>
                     <div className="col-12 d-flex justify-content-center mb-3">
                     <div className="form__group field w-100 px-5">
-                        <input type="time" className="form__field" placeholder="Departure Time" name="depTime" id='Departure Time' value={rider.depTime} onChange={inputChange}  />
+                        <input type="time" className="form__field" placeholder="Departure Time" name="depTime" id='Departure Time' value={rider.depTime} mindate={new Date()} onChange={inputChange}  />
                         <label htmlFor="Departure Time" className="form__label">Departure Time</label>
                            {errors && errors.map(({depTimeempty},index)=>{
                                
