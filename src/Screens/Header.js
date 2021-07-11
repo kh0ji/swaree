@@ -1,13 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Header.scss"
 import {Link} from "react-router-dom"
 import { Button,Navbar,Nav} from "react-bootstrap";
-import { auth } from '../firebase';
-
-
-
+import { auth, database } from '../firebase';
+import MailIcon from '@material-ui/icons/Mail';
+import Badge from '@material-ui/core/Badge';
+import IconButton from '@material-ui/core/IconButton';
+import Notificationmodal from './Notificationmodal';
 function Header({person,setlogout}) {
+    const [modalShow, setModalShow] = useState(false);
+ var [noti,setnoti]=useState([])
+ var [singlenoti,setsinglenoti]=useState({})
+ var [notishow,setnotishow]=useState(false)
+console.log(singlenoti);
+useEffect(() => {
+if(person){
 
+
+  const notiref=database.ref("users")
+  notiref.on("value",(snapshot)=>{
+
+    let nofti=[]
+    snapshot.forEach(snap=>{
+
+      if(snap.val().from===person.email || snap.val().to===person.email){
+        
+       nofti.push({...snap.val(),id:snap.key})
+      }
+    
+    })
+    setnoti(nofti)
+  })
+}
+}, [person]) 
   
 
  var logout=()=>{
@@ -20,6 +45,11 @@ function Header({person,setlogout}) {
 });
 }
  
+var showmodelnoti=(data)=>{
+setsinglenoti(data)
+setnotishow(false)
+setModalShow(true)
+}
 
     return (
        <div className="Header sticky-top d-flex justify-content-center">
@@ -32,6 +62,43 @@ function Header({person,setlogout}) {
     <Nav className="mr-auto text-white font-weight-bold">
      SWAREE | THE RIDE SHARING PLATFORM
     </Nav>
+    <div className="position-relative">
+     <IconButton aria-label="cart" onClick={()=>{setnotishow((p)=>(!p))}} >
+    <Badge  style={{color:"white"}} >
+          <MailIcon />
+        </Badge>
+ </IconButton>
+ {notishow && (
+   <div className="notif">
+
+{noti && noti.map((not,index)=>{
+
+if(not.from===person.email){
+  return (
+     <button key={index} className="btn btn-dark w-100 mb-3" onClick={()=>showmodelnoti(not)}>
+    <div  className="text-white ">your ride request to ({not.toname}) is {not.status}</div>
+    </button>
+  )
+}
+if(not.to===person.email){
+   return (
+     <button key={index} className="btn btn-dark w-100 mb-3"  onClick={()=>showmodelnoti(not)}>
+    <div  className=" text-white">
+      {not.fromname} send you a ride request
+    </div>
+    </button>
+  )
+}
+return null
+ 
+})}
+{noti.length<1 &&(<p>no norification yet</p> )}
+ 
+</div>
+ )}
+
+
+ </div>
      <div className="d-flex align-items-start align-items-lg-center flex-column flex-lg-row unscroll">
             {person===null?(
                 <>
@@ -57,6 +124,14 @@ function Header({person,setlogout}) {
   </Navbar.Collapse>
 </Navbar>
 
+<Notificationmodal
+setsinglenoti={setsinglenoti}
+person={person}
+singlenoti={singlenoti}
+  show={modalShow}
+        onHide={() => setModalShow(false)}
+
+/>
 </div>  
     )
 }

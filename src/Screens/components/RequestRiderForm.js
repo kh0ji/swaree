@@ -2,36 +2,14 @@ import React, { useEffect, useState } from 'react'
 import "./form.scss"
 import { Link, useHistory, useParams } from 'react-router-dom'
 import { firestore } from '../../firebase'
-import { Modal ,Button} from "react-bootstrap"
+
+import VModal from './VModal'
 
 function RequestRiderForm({person}) {
-  var history=useHistory()
-var  MyVerticallyCenteredModal=(props)=>{
-  return (
-    <Modal
-      {...props}
-    
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Rider Information
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-       
-        <p>
-        {`My phone number is ${rider.phone}.You can contact me`}
-        </p>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
-  );
-},
-        tConvert =(time)=> {
+  var history=useHistory(),
+
+
+      tConvert =(time)=> {
   // Check correct time format and split into components
   time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
 
@@ -44,13 +22,18 @@ var  MyVerticallyCenteredModal=(props)=>{
 },
  params=useParams(),
  [modalShow, setModalShow] = useState(false),
+
 [rider,setrider]=useState({}),
 [deleting,  setdeleting]=useState(false)
+
+
     useEffect(()=>{
 
     firestore.collection("riders").doc(params.id).get().then((rid)=>{
 
         setrider(rid.data())
+
+
       
     })  
     },[params.id])
@@ -71,6 +54,8 @@ setdeleting(false)
   }
 
 }
+
+
 
     return (
         <>
@@ -122,7 +107,11 @@ setdeleting(false)
                 </div>
                 </div>
                </div>)}
-  <MyVerticallyCenteredModal
+
+  <VModal
+  rideremail={rider && rider.email}
+  ridername={rider && rider.Name}
+  person={person}
        show={modalShow}
         onHide={() => setModalShow(false)}
   />

@@ -18,5 +18,5 @@ import "firebase/storage"
 var auth= firebase.auth()
 var firestore= firebase.firestore()
 var storage= firebase.storage()
-
-export {auth ,firestore,storage,firebase}
+var database = firebase.database();
+export {auth ,firestore,storage,firebase,database}

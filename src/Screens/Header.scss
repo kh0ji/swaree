@@ -66,3 +66,15 @@ html {
   border: 1px solid var(--secondaryColor);
   background-color: #ffffff !important;
 }
+
+
+.notif{
+  width: 400px;
+  height: auto;
+  background-color: grey;
+  position: absolute;
+  right:  70%;
+  top: 60%;
+  padding: 1em;
+  border-radius: 8px;
+}

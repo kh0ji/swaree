@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Switch } from "react-router";
+
 import { fetchuser } from "./FirebaseFuctions";
 import { FormMainBox, Home, RequestRider ,Header} from "./Screens";
 import {Riderform,RegisterFrom,LoginForm,ForgetPassword, RequestRiderForm} from "./Screens/components"
@@ -12,6 +13,8 @@ function App() {
   var [logout,setlogout]=useState(false)
   var [login,setlogin]=useState(false)
   var [reg,setreg]=useState(false)
+ 
+
  useEffect(()=>{
 
         async function fetchData() {
@@ -27,7 +30,7 @@ function App() {
 
   return (
 <>
-    <Header person={person} setlogout={setlogout}/>
+    <Header  person={person} setlogout={setlogout}/>
     <Switch>
       <Route exact path="/" >
       <Home person={person}/>
