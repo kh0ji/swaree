@@ -37,6 +37,22 @@ if(person){
   
      
   })
+   notiref.on("child_added",(snapshot)=>{
+ 
+ 
+  
+ 
+
+      if(snapshot.val().to===person.email){
+        
+      
+  setnotiicon(false)
+    
+      }
+  
+  
+     
+  })
   notiref.on("value",(snapshot)=>{
  
    
