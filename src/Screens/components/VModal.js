@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Form,Modal ,Button,Alert} from 'react-bootstrap'
 import { database } from '../../firebase';
 import {uuid} from "uuidv4"
-function VModal({rideremail,ridername,person,show,onHide}) {
+function VModal({id,rideremail,ridername,person,show,onHide}) {
 
 var [sending,setsending]=useState(false)
 var [sended,setsended]=useState(false)
@@ -15,7 +15,7 @@ var [sended,setsended]=useState(false)
   fromnumber:"",
   toname:"",
   fromname:"",
-  
+  toid:"",
   status:"pending"
 }),
 
@@ -31,13 +31,13 @@ database.ref("users/").get().then(doc=>{
   let error=[]
  setsending(true)
 doc.forEach(key=>{
-  if(key.val().to===req.to && key.val().from===req.from  && key.val().status==="pending"){
+  if(key.val().toid===req.toid && key.val().from===req.from  && key.val().status==="pending"){
 
     
  error.push({alreadyinpro:true})
-  }else if(key.val().to===req.to  && key.val().from===req.from &&   key.val().status==="rejected"){
+  }else if(key.val().toid===req.toid  && key.val().from===req.from &&   key.val().status==="rejected"){
  error.push({alreadyreject:true})
-  }else if(key.val().to===req.to  && key.val().from===req.from  && key.val().status==="accepted"){
+  }else if(key.val().toid===req.toid  && key.val().from===req.from  && key.val().status==="accepted"){
  error.push({alreadyaccp:true})
   }
  
@@ -72,9 +72,10 @@ setreq((p)=>({...p,
   from:person && person.email,
   toname:ridername,
    fromname:person && person.name,
+   toid:id,
   to:rideremail}))
 
-}, [person,rideremail,ridername])
+}, [person,rideremail,ridername,id])
 
 
   return (

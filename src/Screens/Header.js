@@ -37,13 +37,13 @@ if(person){
   
      
   })
-   notiref.on("child_added",(snapshot)=>{
+ notiref.on("child_added",(snapshot)=>{
  
  
-  
+ 
  
 
-      if(snapshot.val().to===person.email){
+      if(snapshot.val().to===person.email && snapshot.val().status==="pending"){
         
       
   setnotiicon(false)
@@ -58,7 +58,7 @@ if(person){
    
     let nofti=[]
     snapshot.forEach(snap=>{
-
+    
       if(snap.val().from===person.email || snap.val().to===person.email){
         
        nofti.push({...snap.val(),id:snap.key})
@@ -127,7 +127,7 @@ if(not.to===person.email){
    return (
      <button key={index} className="btn btn-dark w-100 mb-3"  onClick={()=>showmodelnoti(not)}>
     <div  className=" text-white">
-      {not.fromname} send you a ride request
+      {not.fromname} send you a ride request on rider name({not.toid})
     </div>
     </button>
   )

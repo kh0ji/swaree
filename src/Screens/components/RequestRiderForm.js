@@ -31,7 +31,7 @@ function RequestRiderForm({person}) {
 
     firestore.collection("riders").doc(params.id).get().then((rid)=>{
 
-        setrider(rid.data())
+        setrider({...rid.data(),id:params.id})
 
 
       
@@ -109,6 +109,7 @@ setdeleting(false)
                </div>)}
 
   <VModal
+  id={rider && rider.id}
   rideremail={rider && rider.email}
   ridername={rider && rider.Name}
   person={person}
