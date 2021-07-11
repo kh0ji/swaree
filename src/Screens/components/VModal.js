@@ -4,6 +4,8 @@ import { database } from '../../firebase';
 import {uuid} from "uuidv4"
 function VModal({rideremail,ridername,person,show,onHide}) {
 
+var [sending,setsending]=useState(false)
+var [sended,setsended]=useState(false)
 
   var [req,setreq]=useState({
   from:"",
@@ -20,21 +22,22 @@ function VModal({rideremail,ridername,person,show,onHide}) {
  [errors, seterrors] = useState([]);
   var sendreq=(e)=>{
     e.preventDefault()
-   
+   setsending(true)
+   setsended(false)
     seterrors([])
 
 database.ref("users/").get().then(doc=>{
 
   let error=[]
-
+ setsending(true)
 doc.forEach(key=>{
-  if(key.val().to===req.to && key.val().status==="pending"){
+  if(key.val().to===req.to && key.val().from===req.from  && key.val().status==="pending"){
 
     
  error.push({alreadyinpro:true})
-  }else if(key.val().to===req.to && key.val().status==="rejected"){
+  }else if(key.val().to===req.to  && key.val().from===req.from &&   key.val().status==="rejected"){
  error.push({alreadyreject:true})
-  }else if(key.val().to===req.to && key.val().status==="accepted"){
+  }else if(key.val().to===req.to  && key.val().from===req.from  && key.val().status==="accepted"){
  error.push({alreadyaccp:true})
   }
  
@@ -48,13 +51,13 @@ doc.forEach(key=>{
     if(req.frommsg===""){error.push({msgempty:true})}
 
   if(error.length){
-     
+      setsending(false)
       seterrors(error)
   
     }else{
-    
+     setsending(false)
    database.ref('users/'+ uuid()).set(req)
-
+   setsended(true)
     }
 
 })
@@ -63,7 +66,7 @@ doc.forEach(key=>{
   }
 
 
-  
+
 useEffect(() => {
 setreq((p)=>({...p, 
   from:person && person.email,
@@ -73,7 +76,7 @@ setreq((p)=>({...p,
 
 }, [person,rideremail,ridername])
 
-
+  console.log(sending);
   return (
   <Modal
       
@@ -111,6 +114,16 @@ setreq((p)=>({...p,
           return null
         
     })} 
+   
+      {sended && (
+        
+    <Alert variant={"success"}>
+    Your request send Successfully
+  </Alert>)} 
+            
+    
+        
+  
     {errors && errors.map(({alreadyaccp},index)=>{
                                
         if(alreadyaccp){
@@ -155,8 +168,8 @@ setreq((p)=>({...p,
     })}
   </Form.Group>
   
-  <Button variant="success" type="submit">
-    Send
+  <Button variant="success" disabled={sending} type="submit">
+   {sending?"Sending..":"Send"} 
   </Button>
 </Form>
       
