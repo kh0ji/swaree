@@ -53,7 +53,7 @@ doc.forEach(key=>{
   if(error.length){
       setsending(false)
       seterrors(error)
-  
+  console.log(error);
     }else{
      setsending(false)
    database.ref('users/'+ uuid()).set(req)
@@ -130,6 +130,17 @@ setreq((p)=>({...p,
         if(alreadyaccp){
             return <Alert key={index} variant={"success"}>
     Your request already accepted by rider
+  </Alert>
+            
+        } 
+          return null
+        
+    })}
+     {errors && errors.map(({alreadyreject},index)=>{
+                               
+        if(alreadyreject){
+            return <Alert key={index} variant={"danger"}>
+    Your request already rejected by rider
   </Alert>
             
         } 
