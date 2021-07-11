@@ -112,7 +112,7 @@ setModalShow(true)
         </Badge>
  </IconButton>
  {notishow && (
-   <div className="notif">
+   <div className="notif text-white">
 
 {noti && noti.map((not,index)=>{
 
@@ -135,7 +135,7 @@ if(not.to===person.email){
 return null
  
 })}
-{noti.length<1 &&(<p>no norification yet</p> )}
+{noti.length<1 &&(<p>no notification yet</p> )}
  
 </div>
  )}
