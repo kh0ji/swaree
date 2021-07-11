@@ -135,7 +135,7 @@ if(not.to===person.email){
 return null
  
 })}
-{noti.length<1 &&(<p>no notification yet</p> )}
+{noti.length<1 &&(<p>No notification yet</p> )}
  
 </div>
  )}
